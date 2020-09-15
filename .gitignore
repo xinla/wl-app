@@ -1,0 +1,13 @@
+node_modules/
+.project
+unpackage/
+.DS_Store
+wxcomponents/**/*.vue
+wxcomponents/**/*.css
+
+unpackage/dist/dev/.sourcemap/mp-weixin/common/main.js.map
+unpackage/dist/dev/.sourcemap/mp-weixin/pages/knowledge/knowledge.js.map
+unpackage/dist/dev/.sourcemap/mp-weixin/pages/task/task.js.map
+unpackage/dist/dev/mp-weixin/app.json
+unpackage/dist/dev/mp-weixin/project.config.json
+unpackage/dist/dev/mp-weixin/common/vendor.js
