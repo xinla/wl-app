@@ -1,4 +1,7 @@
 {
+	"easycom": {
+			"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+		},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/index/index",
@@ -19,6 +22,12 @@
 				"enablePullDownRefresh": true
 			}
 		}, {
+			"path": "pages/waybillDetail/waybillDetail",
+			"style": {
+				"navigationBarTitleText": "运单信息",
+				"enablePullDownRefresh": true
+			}
+		}, {
 			"path": "pages/user/user",
 			"style": {
 				"navigationBarTitleText": "个人"
@@ -27,6 +36,11 @@
 			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": "注册/登录"
+			}
+		}, {
+			"path": "pages/car/car",
+			"style": {
+				"navigationBarTitleText": "车辆列表"
 			}
 		}
 	],
@@ -56,7 +70,7 @@
 			"selectedIconPath": "static/bar/work_1.png",
 			"text": "货源"
 		}, {
-			"pagePath": "pages/goods/goods",
+			"pagePath": "pages/waybill/waybill",
 			"iconPath": "static/bar/knowledge.png",
 			"selectedIconPath": "static/bar/knowledge_1.png",
 			"text": "运单"

@@ -12,10 +12,11 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
+	@import "uview-ui/index.scss";
 	@import url("/static/styles/iconfont.css");
 	/*每个页面公共css */
-	.flex { display: flex; }
+	.flex { display: flex; justify-content: space-between;}
 	.iflex { display: inline-flex;}
 	.bx { box-sizing: border-box; }
 	.bfc-o { overflow: hidden;position: relative; }
