@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<u-swiper :list="list" duration="2000" :circular="true" :effect3d="true"></u-swiper>
+		<u-swiper :list="images" duration="2000" :circular="true" :effect3d="true"></u-swiper>
 
 		<view class="main">
 			<view class="title">
@@ -14,10 +14,10 @@
 				保险服务
 			</view>
 			<view class="service flex">
-				<view class="li ac" v-for="(item, index) of 3" :key="index">
-					<image class="img" src="/static/a.jpg" mode=""></image>
+				<view class="li ac" v-for="(item, index) of insurance" :key="index">
+					<image class="img" :src="'http://gs.wholexy.cn' + item.img_url" mode=""></image>
 					<view class="text">
-						保险服务
+						{{item.title}}
 					</view>
 				</view>
 			</view>
@@ -25,52 +25,82 @@
 			<view class="title">
 				公司新闻
 			</view>
-			<view class="flex news" v-for="(item, index) of 3" :key="index">
-				<image src="/static/a.jpg"
-				 mode="aspectFill"></image>
-				 <view class="">
-					<view class="news-title">釉色渲染仕女图韵味被私藏，而你嫣然的一笑如含苞待放</view>
-					<view class="news-desc">釉色渲染仕女图韵味被私藏，而你嫣然的一笑如含苞待放</view>
-				 </view>
+			<view class="news" v-for="(item, index) of news" :key="index">
+				<image :src="'http://gs.wholexy.cn' + item.img_url" mode="aspectFill"></image>
+				<view class="">
+					<view class="news-title">{{item.title}}</view>
+					<view class="news-desc" v-html="item.content"></view>
+				</view>
 			</view>
-			
+
 			<view class="title">
 				联系我们
 			</view>
 			<view class="contact ac">
-				地址：安徽色花姑娘和合肥
+				地址：{{contact.address}}
 			</view>
 			<view class="contact ac">
-				电话：1866666666
+				电话：{{contact.phone}}
 			</view>
 			<view class="contact ac">
-				邮箱：1866666666@qq.xcom
+				邮箱：{{contact.mailbox}}
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import http from '@/utils/request.js'
 	export default {
 		data() {
 			return {
-				list: [{
-						image: '/static/a.jpg',
-						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
-					},
-					{
-						image: '/static/b.jpg',
-						title: '身无彩凤双飞翼，心有灵犀一点通'
-					},
-					{
-						image: '/static/c.jpg',
-						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
-					}
-				]
+				images: [],
+				insurance: [],
+				news: [],
+				contact: {}
 			}
 		},
 		onLoad() {
-
+			// 滚动图
+			http.get('', {
+				params: {
+					c: '1'
+				}
+			}).then(r => {
+				for (let s of r) {
+					this.images.push({
+						image: http.config.baseURL = 'http://gs.wholexy.cn' + s.img_url,
+						title: s.title
+					})
+				}
+			})
+			
+			// 保险
+			http.get('', {
+				params: {
+					c: '2'
+				}
+			}).then(r => {
+				this.insurance = r
+			})
+			
+			// 新闻
+			http.get('', {
+				params: {
+					c: '3'
+				}
+			}).then(r => {
+				this.news = r
+			})
+			
+			// 联系我们
+			http.get('', {
+				params: {
+					c: '4'
+				}
+			}).then(r => {
+				this.contact = r[0]
+			})
 		},
 		methods: {
 
@@ -80,7 +110,7 @@
 
 <style lang="scss" scoped>
 	.main {
-		padding: 0 24rpx;
+		padding: 0 24rpx 15rpx;
 	}
 
 	.title {
@@ -90,6 +120,7 @@
 	}
 
 	.service {
+		justify-content: space-around;
 		.li {
 			width: 32%;
 		}
@@ -104,26 +135,30 @@
 			color: $uni-text-color-sub;
 		}
 	}
-	
+
 	.news {
 		padding-bottom: 30rpx;
+display: flex;
 		image {
-				flex: 0 0 230rpx;
-				height: 230rpx;
-				border-radius: 8rpx;
-				margin-right: 24px;
-			}
-			.news-title {
-				font-size: 32rpx;
-				font-weight: 600;
-			}
-			.news-desc {
-				padding-top: 20rpx;
-				font-size: 24rpx;
-				color: #ddd;
-			}
+			flex: 0 0 230rpx;
+			height: 230rpx;
+			border-radius: 8rpx;
+			margin-right: 24px;
+		}
+
+		.news-title {
+			font-size: 32rpx;
+			font-weight: 600;
+		}
+
+		.news-desc {
+			padding-top: 20rpx;
+			font-size: 24rpx;
+			color: #ddd;
+		}
 	}
+
 	.contact {
 		padding: 10rpx 0;
-		}
+	}
 </style>

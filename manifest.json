@@ -1,5 +1,5 @@
 {
-    "name" : "星慕客",
+    "name" : "物流",
     "appid" : "__UNI__B05B3CB",
     "description" : "",
     "versionName" : "1.0.0",
@@ -76,5 +76,15 @@
     },
     "uniStatistics" : {
         "enable" : false
+    },
+    "h5" : {
+        "devServer" : {
+            "proxy" : {
+                "http://gs.wholexy.cn/jk/index.ashx" : {
+                    "target" : "http://gs.wholexy.cn/jk/index.ashx",
+                    "changeOrigin" : true
+                }
+            }
+        }
     }
 }
