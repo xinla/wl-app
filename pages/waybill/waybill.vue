@@ -1,25 +1,28 @@
 <template>
 	<view class="page">
 		<view class="search-wrap">
-			<u-search placeholder="请输入货源号" v-model="keyword" @search="getList(1)" @custom="getList(1)"></u-search>
+			<u-search placeholder="请输入运单号" v-model="keyword" @search="getData(1)" @custom="getData(1)"></u-search>
 		</view>
 		<view class="main">
 			<image src="@/static/a.jpg" mode=""></image>
 			<view class="list-wrap">
 
-				<view class="list" v-for="(item, index) of 13" :key="index">
+				<view class="list" v-for="(item, index) of list" :key="index">
 					<view class="title flex">
-						<text>4164965498wtawe465496498</text>
-						<text>【皖A888888】</text>
+						<text>{{item.ownerCustomer}}</text>
+						<text>【{{item.carCode}}】</text>
 					</view>
 					<view class="address info">
-						安徽合肥 <text class="to">到</text>安徽合肥
+						{{item.originatingPlace}} <text class="to">到</text>{{item.destination}}
+					</view>
+					<view class="address info">
+						运单编号：{{item.orderNumber}}
 					</view>
 					<view class="name info flex">
-						运输时间：2020-02-20
+						运输时间：{{item.operateDate}}
 						<view class="btn">
-							<u-button type="error" size="mini" shape="circle" :plain="true">撤销</u-button>
-							<u-button type="success" size="mini" shape="circle" :plain="true">开始</u-button>
+							<u-button type="error" size="mini" shape="circle" :plain="true" @click="action(item.orderNumber, 0)">撤销</u-button>
+							<u-button type="success" size="mini" shape="circle" :plain="true" @click="action(item.orderNumber, 1)">开始</u-button>
 						</view>
 					</view>
 				</view>
@@ -30,15 +33,18 @@
 </template>
 
 <script>
+	import {
+		getOrderByUserId,
+		revokeOrder,
+		startOrder
+	} from '@/api/index.js'
 	export default {
 		data() {
 			return {
-				query: {
-					keywords: '',
-					page: 0
-				},
+				keywords: '',
 				isMask: false,
 				acitveType: 0,
+				list: []
 			}
 		},
 		onPullDownRefresh() {
@@ -49,23 +55,27 @@
 		},
 		methods: {
 			getData(page) {
-				this.query.page = page
 				uni.showLoading({
 					title: '加载中...'
 				});
 
-				setTimeout(function() {
+				getOrderByUserId(this.$store.state.userId).then(r => {
+					this.list = r.Rows
 					uni.stopPullDownRefresh()
 					uni.hideLoading();
-				}, 1000);
+				})
 			},
 			showMask(type) {
 				this.isMask = true
 			},
-			switchType(index) {
-				this.acitveType = index
-				this.isMask = false
-				this.getData(1)
+			action(id, type) {
+				(type ? startOrder(id) : revokeOrder(id)).then(r => {
+					uni.showToast({
+						title: '操作成功',
+						duration: 2000
+					});
+					this.getData(1)
+				})
 			},
 			search(keywords) {
 				this.query.keywords = keywords
@@ -79,11 +89,11 @@
 		}
 	}
 </script>
-
 <style lang="scss" scoped>
 	.search-wrap {
 		padding: 18px 30rpx;
 	}
+
 	.main {
 		position: relative;
 		overflow: hidden;
@@ -119,7 +129,7 @@
 		}
 
 		.address {
-			padding: 20rpx 0 40rpx;
+			margin: 20rpx 0 40rpx;
 		}
 
 		.to {

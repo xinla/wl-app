@@ -15,7 +15,7 @@
 			</view>
 			<view class="service flex">
 				<view class="li ac" v-for="(item, index) of insurance" :key="index">
-					<image class="img" :src="'http://gs.wholexy.cn' + item.img_url" mode=""></image>
+					<image class="img" :src="domain + item.img_url" mode=""></image>
 					<view class="text">
 						{{item.title}}
 					</view>
@@ -26,7 +26,7 @@
 				公司新闻
 			</view>
 			<view class="news" v-for="(item, index) of news" :key="index">
-				<image :src="'http://gs.wholexy.cn' + item.img_url" mode="aspectFill"></image>
+				<image :src="domain + item.img_url" mode="aspectFill"></image>
 				<view class="">
 					<view class="news-title">{{item.title}}</view>
 					<view class="news-desc" v-html="item.content"></view>
@@ -57,44 +57,46 @@
 				images: [],
 				insurance: [],
 				news: [],
-				contact: {}
+				contact: {},
+				domain: 'http://gs.wholexy.cn',
 			}
 		},
 		onLoad() {
+			let apiBase = this.domain + '/jk/index.ashx'
 			// 滚动图
-			http.get('', {
+			http.get(apiBase, {
 				params: {
 					c: '1'
 				}
 			}).then(r => {
 				for (let s of r) {
 					this.images.push({
-						image: http.config.baseURL = 'http://gs.wholexy.cn' + s.img_url,
+						image: this.domain + s.img_url,
 						title: s.title
 					})
 				}
 			})
-			
+
 			// 保险
-			http.get('', {
+			http.get(apiBase, {
 				params: {
 					c: '2'
 				}
 			}).then(r => {
 				this.insurance = r
 			})
-			
+
 			// 新闻
-			http.get('', {
+			http.get(apiBase, {
 				params: {
 					c: '3'
 				}
 			}).then(r => {
 				this.news = r
 			})
-			
+
 			// 联系我们
-			http.get('', {
+			http.get(apiBase, {
 				params: {
 					c: '4'
 				}
@@ -121,6 +123,7 @@
 
 	.service {
 		justify-content: space-around;
+
 		.li {
 			width: 32%;
 		}
@@ -138,7 +141,8 @@
 
 	.news {
 		padding-bottom: 30rpx;
-display: flex;
+		display: flex;
+
 		image {
 			flex: 0 0 230rpx;
 			height: 230rpx;

@@ -6,7 +6,8 @@ const store = new Vuex.Store({
 		login: false,
 		token: '',
 		avatarUrl: '',
-		userName: ''
+		userName: '',
+		userId: '5EEC2FBA637855286116'
 	},
 	mutations: {
 		login(state, provider) {

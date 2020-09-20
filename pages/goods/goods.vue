@@ -1,23 +1,23 @@
 <template>
 	<view class="page">
 		<view class="search-wrap">
-			<u-search placeholder="请输入货源号" v-model="keyword" @search="getList(1)" @custom="getList(1)"></u-search>
+			<u-search placeholder="请输入货源号" v-model="keyword" @search="getData(1)" @custom="getData(1)"></u-search>
 		</view>
 
 		<view class="main">
 			<image src="@/static/a.jpg" mode=""></image>
 			<view class="list-wrap">
 
-				<view class="list" v-for="(item, index) of 13" :key="index">
+				<view class="list" v-for="(item, index) of list" :key="index">
 					<view class="title flex">
-						<text>ansuns物流邮箱公司</text>
-						<text>【4164965498wtawe465496498】</text>
+						<text>{{item.ownerCustomer}}</text>
+						<text>{{item.orderNumber}}</text>
 					</view>
 					<view class="address info">
-						安徽合肥 <text class="to">到</text>安徽合肥
+						{{item.originatingPlace}} <text class="to">到</text>{{item.destination}}
 					</view>
 					<view class="name info flex">
-						货物名称：高端设备
+						货物名称：{{item.goodsName || '无'}}
 						<view class="btn">
 							<u-button type="success" size="mini" shape="circle" :plain="true">扫码接单</u-button>
 						</view>
@@ -30,17 +30,32 @@
 </template>
 
 <script>
+	import {
+		goodsSourceXC
+	} from '@/api/index.js'
 	export default {
 		data() {
 			return {
-				keyword: ''
+				keyword: '',
+				list: []
 			}
 		},
-		components: {},
+		onLoad() {
+			this.getData()
+		},
 		methods: {
-			getList() {
+			getData(page) {
+				uni.showLoading({
+					title: '加载中...'
+				});
 
-			}
+				goodsSourceXC().then(r => {
+					this.list = r.Rows
+					uni.stopPullDownRefresh()
+					uni.hideLoading();
+				})
+
+			},
 		}
 	}
 </script>
@@ -95,6 +110,7 @@
 		.info {
 			color: #bbb;
 		}
+
 		/deep/.u-btn {
 			padding: 0 40rpx;
 		}
