@@ -1,38 +1,57 @@
 <template>
-		<view class="main">
-			<image src="@/static/a.jpg" mode=""></image>
-			<view class="list-wrap">
+	<view class="main">
+		<image src="@/static/a.jpg" mode=""></image>
+		<view class="list-wrap">
 
-				<view class="list" v-for="(item, index) of 13" :key="index">
-					<view class="title flex">
-						<text>皖A888888</text>
-						<text>【五星】</text>
-					</view>
-					<view class="name info flex">
-						注册时间：2020-02-20
-						<view class="btn">
-							<u-button type="success" size="mini" shape="circle" :plain="true">查看信息</u-button>
-						</view>
+			<view class="list" v-for="(item, index) of list" :key="index">
+				<view class="title flex">
+					<text>{{item.carCode}}</text>
+					<text>【{{item.carRank}}】</text>
+				</view>
+				<view class="name info flex">
+					注册时间：{{item.operateDate}}
+					<view class="btn">
+						<u-button type="success" size="mini" shape="circle" :plain="true" @click="goDetail(item)">查看信息</u-button>
 					</view>
 				</view>
-
 			</view>
-			
-			<u-button type="primary" @click="">关联车辆信息</u-button>
+
 		</view>
+
+		<u-button type="primary" @click="goDetail()">关联车辆信息</u-button>
+	</view>
 </template>
 
 <script>
+	import {
+		getCarByUserId
+	} from '@/api/index.js'
+
 	export default {
 		data() {
 			return {
-				keyword: ''
+				list: []
 			}
 		},
-		components: {},
+		onLoad() {
+			this.getData()
+		},
 		methods: {
-			getList() {
+			getData() {
+				uni.showLoading({
+					title: '加载中...'
+				});
 
+				getCarByUserId(this.$store.state.userId).then(r => {
+					this.list = r.Rows
+					uni.stopPullDownRefresh()
+					uni.hideLoading();
+				})
+			},
+			goDetail(data) {
+				uni.navigateTo({
+					url: '../relateCar/relateCar'
+				})
 			}
 		}
 	}
@@ -71,12 +90,13 @@
 
 		.title {
 			font-weight: 600;
-			padding-bottom:  40rpx;
+			padding-bottom: 40rpx;
 		}
 
 		.info {
 			color: #bbb;
 		}
+
 		/deep/.u-btn {
 			padding: 0 40rpx;
 		}

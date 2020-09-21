@@ -1,14 +1,12 @@
 <script>
 	export default {
-		onLaunch: function() {},
 		onShow: function() {
-			if (uni.getStorageSync('UserId') == '') {
+			if (uni.getStorageSync('userId') == '') {
 				uni.navigateTo({
-				    url: 'pages/register/register'
+				    url: '/pages/register/register'
 				})
 			}
-		},
-		onHide: function() {}
+		}
 	}
 </script>
 

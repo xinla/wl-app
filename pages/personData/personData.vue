@@ -14,7 +14,7 @@
 					<view class="info">查看信息</view>
 				</view>
 			</view>
-			<view class="button">关联车辆信息</view>
+			<view class="button" @click="routeChange('/pages/relateCar/relateCar')">关联车辆信息</view>
 		</view>
 	</view>
 </template>
