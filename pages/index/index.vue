@@ -1,7 +1,6 @@
 <template>
 	<view>
 		<u-swiper :list="images" duration="2000" :circular="true" :effect3d="true"></u-swiper>
-
 		<view class="main">
 			<view class="title">
 				扫码接单

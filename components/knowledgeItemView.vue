@@ -1,12 +1,10 @@
 <template name="knowledgeItemView">
 	<view class="container">
-		<view class="title">
-			请问积分可以做什么用
-		</view>
+		<view class="title">请问积分可以做什么用</view>
 		<text class="time">2020-04-15 14:08:42</text>
 		<view class="expand">
 			<view class="row row-infos">
-				<image class="avatar" mode="scaleToFill" :src="static/bar/task.png"></image>
+				<image class="avatar" mode="scaleToFill" :src="static / bar / task.png"></image>
 				<text class="name">周波</text>
 			</view>
 			<view class="row">
@@ -20,62 +18,62 @@
 </template>
 
 <script>
-	export default {
-		name: "knowledgeItemView",
-		data() {
-			return {}
-		}
+export default {
+	name: 'knowledgeItemView',
+	data() {
+		return {};
 	}
+};
 </script>
 
 <style lang="less" scoped>
-	.container {
-		padding: 20rpx;
-		background: #FFFFFF;
-	}
+.container {
+	padding: 20rpx;
+	background: #ffffff;
+}
 
-	.title {
-		font-size: 26rpx;
-		font-weight: bold;
-	}
+.title {
+	font-size: 26rpx;
+	font-weight: bold;
+}
 
-	.time {
-		color: #666;
-		font-size: 20rpx;
-	}
+.time {
+	color: #666;
+	font-size: 20rpx;
+}
 
-	.row {
-		font-size: 20rpx;
-		line-height: 60rpx;
-		&.row-infos {
-			display: flex;
-			align-items: center;
-		}
-	}
-
-	.avatar {
-		background: #ff9008;
-		width: 40rpx;
-		height: 40rpx;
-		border-radius: 50%;
-	}
-
-	.name {
-		font-size: 20rpx;
-		margin-left: 10rpx;
-	}
-
-	.key {
-		color: #999;
-	}
-
-	.value {
-		color: #999;
-	}
-
-	.expand {
+.row {
+	font-size: 20rpx;
+	line-height: 60rpx;
+	&.row-infos {
 		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
+		align-items: center;
 	}
+}
+
+.avatar {
+	background: #ff9008;
+	width: 40rpx;
+	height: 40rpx;
+	border-radius: 50%;
+}
+
+.name {
+	font-size: 20rpx;
+	margin-left: 10rpx;
+}
+
+.key {
+	color: #999;
+}
+
+.value {
+	color: #999;
+}
+
+.expand {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
 </style>

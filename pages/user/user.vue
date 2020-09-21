@@ -1,151 +1,177 @@
 <template>
-	<view class="page">
-		<view class="top-wrap slide-pad">
-			<view class="top flex">
-				<view class="left iflex">
-					<image class="avatar fl" src="/static/a.jpg"></image>
-					<view class="">
-						<view class="name">
-							yonghuming
-						</view>
-						<view class="tag">
-							未登录
-						</view>
+	<view class="user-wrapper">
+		<view class="wrapper-header">
+			<image class="header" src="../../static/b.jpg"></image>
+			<view class="content">
+				<view class="userinfo">
+					<image class="head" src="../../static/user.png"></image>
+					<text>18226626731</text>
+					<view class="medal">
+						<text>暂无</text>
+						<image src="../../static/medal.png" mode=""></image>
 					</view>
 				</view>
-				<view class="right">
-					<uni-icons type="success_no_circle"></uni-icons>
-					签到
+				<view class="list">
+					<view class="item">
+						<view class="title">总运量</view>
+						<view class="val">0千吨</view>
+					</view>
+					<view class="item">
+						<view class="title">总单数</view>
+						<view class="val">0单</view>
+					</view>
+					<view class="item">
+						<view class="title">结算单数</view>
+						<view class="val">0单</view>
+					</view>
+					<view class="item">
+						<view class="title">总运费</view>
+						<view class="val">0万</view>
+					</view>
 				</view>
 			</view>
 		</view>
-
-		<view class="middle flex">
+		<view class="user-list">
+			<view class="item" @click="routeChange('/pages/personData/personData')">
+				<image src="../../static/icon/user.png"></image>
+				<text>个人信息</text>
+				<image class="right" src="../../static/icon/right.png"></image>
+			</view>
 			<view class="item">
-				可提现余额
-				<view class="num">
-					￥0.00
-				</view>
+				<image src="../../static/icon/fee.png"></image>
+				<text>费用中心</text>
+				<image class="right" src="../../static/icon/right.png"></image>
 			</view>
-			<view class="item">
-				我的积分
-				<view class="num">
-					0
-				</view>
-			</view>
-		</view>
-
-		<view class="login ac">
-			<navigator url="../login/login" hover-class="navigator-hover">
-				请登录
-			</navigator>
-		</view>
-		
-		<view class="login ac logout">
-				退出登录
 		</view>
 	</view>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-
-			}
-		},
-		methods: {
-
+export default {
+	data() {
+		return {}
+	},
+	methods: {
+		routeChange (val) {
+			uni.navigateTo({
+			    url: val
+			})
 		}
 	}
+}
 </script>
 
+<style>
+	page {
+		background: #f1f1f1;
+	}
+</style>
 <style lang="scss" scoped>
-	.page {
-		background: #eee;
-		height: 100vh;
-		overflow: auto;
-	}
-
-	.top-wrap {
-		background: #fff;
-	}
-
-	.top {
-		justify-content: space-between;
-		padding-bottom: 20rpx;
-		border-bottom: 1px solid #eee;
-
-		.avatar {
-			background: #ff9008;
-			width: 120rpx;
-			height: 120rpx;
-			border-radius: 50%;
-			margin: 20rpx 36rpx 0 0;
-			vertical-align: middle;
+	.user-wrapper {
+		font-size: 0;
+		line-height: 1;
+		.wrapper-header {
+			width: 100vw;
+			position: relative;
+			.header {
+				width: 100vw;
+				height: 450rpx;
+			}
+			.content {
+				min-height:  400rpx;
+				padding: 50rpx 30rpx;
+				border-radius: 10rpx;
+				box-sizing: border-box;
+				box-shadow: 3rpx 0 10rpx #ccc;
+				background: #fff;
+				position: absolute;
+				bottom: -200rpx;
+				left: 20rpx;
+				right: 20rpx;
+				z-index: 1;
+				.userinfo {
+					display: flex;
+					align-items: center;
+					width: 100%;
+					padding: 0 0 80rpx 0;
+					border-bottom: 1rpx dashed #ccc;
+					.head {
+						width: 140rpx;
+						height: 140rpx;
+						border-radius: 50%;
+						border: 10rpx solid #3c97de;
+						box-sizing: border-box;
+					}
+					text {
+						flex: 1;
+						color: #333;
+						font-size: 26rpx;
+						margin: 0 0 0 20rpx;
+					}
+					.medal {
+						display: inline-flex;
+						align-items: center;
+						text {
+							color: #f6b364;
+						}
+						image {
+							width: 40rpx;
+							height: 40rpx;
+						}
+					}
+				}
+				.list {
+					display: flex;
+					align-items: center;
+					padding: 40rpx 0 0 0;
+					.item {
+						flex: 1;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						.title {
+							color: #666;
+							font-size: 24rpx;
+						}
+						.val {
+							color: #333;
+							font-size: 28rpx;
+							margin: 20rpx 0 0 0;
+						}
+					}
+				}
+			}
 		}
-
-		.name {
-			margin-top: 10rpx;
-			font-size: 32rpx;
-			font-weight: 600;
+		.user-list {
+			width: 100vw;
+			padding: 250rpx 0 0 0;
+			background: #fff;
+			.item {
+				display: flex;
+				align-items: center;
+				height: 90rpx;
+				margin: 0 30rpx;
+				box-sizing: border-box;
+				border-bottom: 1rpx solid #ccc;
+				&:last-child {
+					border-bottom: none;
+				}
+				image {
+					width: 40rpx;
+					height: 40rpx;
+					&.right {
+						width: 30rpx;
+						height: 30rpx;
+					}
+				}
+				text {
+					flex: 1;
+					color: #333;
+					font-size: 28rpx;
+					margin: 0 0 0 20rpx;
+				}
+			}
 		}
-
-		.tag {
-			display: inline-block;
-			background: #ff3815;
-			margin: 20rpx 0;
-			padding: 0 16rpx;
-			color: #fff;
-			font-size: 28rpx;
-			border-radius: 8rpx;
-		}
-	}
-
-	.middle {
-		background: #fff;
-		justify-content: space-around;
-
-		.item {
-			padding: 60rpx 0;
-			font-size: 26rpx;
-			text-align: center;
-			// width: ;
-			color: #888;
-		}
-
-		.num {
-			color: #333;
-			font-size: 46rpx;
-			font-weight: 600;
-		}
-	}
-
-	.login {
-		margin-top: 20rpx;
-		color: #ff0263;
-		background: #fff;
-		line-height: 90rpx;
-	}
-
-	.type-title {
-		margin: 0 30rpx;
-		padding: 24rpx 0;
-		font-size: 28rpx;
-		font-weight: 600;
-		border-bottom: 1rpx solid #eee;
-	}
-
-	/deep/.border--left {
-		margin: 0 30rpx !important;
-	}
-	/deep/.uni-list--border-top, /deep/.uni-list--border-bottom {
-		display: none;
-	}
-	/deep/.uni-list {
-		border-top: 20rpx solid #eee;
-	}
-	.logout {
-		margin: 20rpx 0;
 	}
 </style>

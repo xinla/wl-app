@@ -1,72 +1,54 @@
 <script>
 	export default {
-		onLaunch: function() {
-			console.log('App Launch')
-		},
-		onShow: function() {
-			console.log('App Show')
-		},
-		onHide: function() {
-			console.log('App Hide')
-		}
+		onLaunch: function() {},
+		onShow: function() {},
+		onHide: function() {}
 	}
 </script>
 
 <style lang="scss">
 	@import "uview-ui/index.scss";
 	@import url("/static/styles/iconfont.css");
-
 	/*每个页面公共css */
 	.flex {
 		display: flex;
 		justify-content: space-between;
 	}
-
 	.iflex {
 		display: inline-flex;
 	}
-
 	.bx {
 		box-sizing: border-box;
 	}
-
 	.bfc-o {
 		overflow: hidden;
 		position: relative;
 	}
-
 	.bfc-d {
 		display: inline-block;
 		vertical-align: top;
 		position: relative;
 	}
-
 	.bfc-p {
 		position: absolute;
 	}
-
 	.fl {
 		float: left;
 		position: relative;
 	}
-
 	.fr {
 		float: right;
 		position: relative;
 	}
-
 	.al {
 		text-align: left;
 	}
-
 	.ac {
 		text-align: center;
 	}
-
 	.ar {
 		text-align: right;
 	}
-
 	.tf,
 	.bf {
 		position: fixed;
@@ -75,25 +57,20 @@
 		height: 50px;
 		z-index: 99;
 	}
-
 	.tf {
 		top: 0;
 	}
-
 	.bf {
 		bottom: 0;
 	}
-
 	.toe {
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-
 	.cp {
 		cursor: pointer;
 	}
-
 	.cc {
 		position: absolute;
 		top: 50%;
@@ -101,11 +78,9 @@
 		transform: translate(-50%, -50%);
 		overflow: auto;
 	}
-
 	.slide-pad {
 		padding: 0 30rpx;
 	}
-
 	.mask {
 		position: fixed;
 		width: 100%;

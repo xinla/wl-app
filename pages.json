@@ -43,7 +43,19 @@
 				"navigationBarTitleText": "车辆列表"
 			}
 		}
-	],
+        ,{
+            "path" : "pages/register/register",
+            "style": {
+            	"navigationBarTitleText": "注册"
+            }
+        }
+        ,{
+            "path" : "pages/personData/personData",
+            "style": {
+            	"navigationBarTitleText": "个人信息"
+            }
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "xx物流",
