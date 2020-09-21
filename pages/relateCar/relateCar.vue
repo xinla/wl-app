@@ -2,44 +2,40 @@
 	<view class="register-wrapper">
 		<image class="header" src="../../static/b.jpg"></image>
 		<view class="content">
-			<view class="title">司机注册</view>
+			<view class="title">关联信息</view>
+			<view class="list">
+				<input type="text" v-model="form.carCode" placeholder="请输入车牌号">
+			</view>
 			<view class="list">
 				<input type="text" v-model="form.phoneNumber" placeholder="请输入司机号码">
 			</view>
-			<view class="list">
-				<input type="text" v-model="form.password" placeholder="请输入密码">
-			</view>
-			<view class="list">
-				<input type="text" v-model="form.driverName" placeholder="请输入姓名">
-			</view>
-			<view class="submit">注册</view>
+			<view class="submit" @click="submit">查询</view>
 		</view>
 	</view>
 </template>
 
 <script>
 	import {
-		register
+		getRelationCar
 	} from '@/api/index.js'
 export default {
 	data() {
 		return {
 			form: {
 				phoneNumber: '',
-				driverName: '',
-				password: '',
+				carCode: '',
+				userCode: '',
 			}
 		};
 	},
 	methods: {
 		submit() {
 			uni.showLoading();
-			register(this.form).then(r => {
-				uni.stopPullDownRefresh()
+			this.form.userCode = this.$store.state.userId
+			getRelationCar(this.form).then(r => {
 				uni.hideLoading();
-				this.$store.commit('login', r)
 				uni.navigateTo({
-					url: '../index/index'
+					url: '../car/car'
 				})
 			})
 		}

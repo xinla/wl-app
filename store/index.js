@@ -16,6 +16,7 @@ const store = new Vuex.Store({
 			state.login = true;
 			state.token = provider.token;
 			state.userName = provider.userName;
+			state.userId = provider.id;
 			state.avatarUrl = provider.avatarUrl;
 		},
 		logout(state) {

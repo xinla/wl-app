@@ -100,6 +100,18 @@ export function getOrderByUserId(userId) {
 }
 
 /**
+ * 14)开始查询运单
+ * @param orderNumber	运单编号	String	是
+ */
+export function getOrderByNum(orderNumber) {
+	return http.get('/webApp/getOrderByNum', {
+		params: {
+			orderNumber
+		}
+	})
+}
+
+/**
  * 15)开始运单
  * @param data 运单编号	String	是
  */

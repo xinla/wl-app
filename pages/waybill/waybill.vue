@@ -21,8 +21,8 @@
 					<view class="name info flex">
 						运输时间：{{item.operateDate}}
 						<view class="btn">
-							<u-button type="error" size="mini" shape="circle" :plain="true" @click="action(item.orderNumber, 0)">撤销</u-button>
-							<u-button type="success" size="mini" shape="circle" :plain="true" @click="action(item.orderNumber, 1)">开始</u-button>
+							<u-button type="error" size="mini" shape="circle" :plain="true" @click="action(item.orderNumber)">撤销</u-button>
+							<u-button type="success" size="mini" shape="circle" :plain="true" @click="goDetail(item.orderNumber)">开始</u-button>
 						</view>
 					</view>
 				</view>
@@ -42,8 +42,6 @@
 		data() {
 			return {
 				keywords: '',
-				isMask: false,
-				acitveType: 0,
 				list: []
 			}
 		},
@@ -65,25 +63,20 @@
 					uni.hideLoading();
 				})
 			},
-			showMask(type) {
-				this.isMask = true
-			},
 			action(id, type) {
-				(type ? startOrder(id) : revokeOrder(id)).then(r => {
+				revokeOrder(id).then(r => {
 					uni.showToast({
 						title: '操作成功',
-						duration: 2000
+						duration: 1500
 					});
-					this.getData(1)
+					setTimeout(() => {
+						this.getData(1)
+					}, 1500)
 				})
 			},
-			search(keywords) {
-				this.query.keywords = keywords
-				this.getData(1)
-			},
-			goDetail(data) {
+			goDetail(id) {
 				uni.navigateTo({
-					url: '../collegeDetail/collegeDetail'
+					url: '../waybillDetail/waybillDetail?id=' + id
 				})
 			}
 		}

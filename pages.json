@@ -42,6 +42,11 @@
 			"style": {
 				"navigationBarTitleText": "车辆列表"
 			}
+		}, {
+			"path": "pages/relateCar/relateCar",
+			"style": {
+				"navigationBarTitleText": "关联车辆"
+			}
 		}
         ,{
             "path" : "pages/register/register",
