@@ -4,25 +4,46 @@
 		<view class="content">
 			<view class="title">司机注册</view>
 			<view class="list">
-				<input type="text" placeholder="请输入司机号码">
+				<input v-model="form.phoneNumber" type="text" placeholder="请输入司机号码">
 			</view>
 			<view class="list">
-				<input type="text" placeholder="请输入密码">
+				<input v-model="form.password" type="text" placeholder="请输入密码">
 			</view>
 			<view class="list">
-				<input type="text" placeholder="请输入姓名">
+				<input v-model="form.driverName" type="text" placeholder="请输入姓名">
 			</view>
-			<view class="submit">注册</view>
+			<view class="submit" @click="submitFunc">注册</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import http from '@/utils/request.js'
 export default {
 	data() {
-		return {};
+		return {
+			form: {
+				phoneNumber: '',
+				password: '',
+				driverName: ''
+			}
+		};
 	},
-	methods: {}
+	methods: {
+		submitFunc() {
+			uni.request({
+			    url: 'https://gswl.sx56yun.com/lps/webApp/registerCarApp',
+			    data: this.form,
+				method: 'POST',
+			    success: ({ data }) => {
+					if (data.code == '200') {
+						console.log(data.record.id)
+						uni.setStorageSync('userId', data.record.id)
+					}
+			    }
+			})
+		}
+	}
 };
 </script>
 

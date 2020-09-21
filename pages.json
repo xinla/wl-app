@@ -1,7 +1,7 @@
 {
 	"easycom": {
-			"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
-		},
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/index/index",
@@ -42,17 +42,31 @@
 			"style": {
 				"navigationBarTitleText": "车辆列表"
 			}
+		}, {
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		}, {
+			"path": "pages/personData/personData",
+			"style": {
+				"navigationBarTitleText": "个人信息"
+			}
+		}, {
+			"path": "pages/personData/details",
+			"style": {
+				"navigationBarTitleText": "基本信息"
+			}
+		}, {
+			"path": "pages/personData/edit",
+			"style": {
+				"navigationBarTitleText": "修改信息"
+			}
 		}
-        ,{
-            "path" : "pages/register/register",
+	    ,{
+            "path" : "pages/money/money",
             "style": {
-            	"navigationBarTitleText": "注册"
-            }
-        }
-        ,{
-            "path" : "pages/personData/personData",
-            "style": {
-            	"navigationBarTitleText": "个人信息"
+            	"navigationBarTitleText": "费用中心"
             }
         }
     ],

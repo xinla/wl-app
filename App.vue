@@ -1,7 +1,13 @@
 <script>
 	export default {
 		onLaunch: function() {},
-		onShow: function() {},
+		onShow: function() {
+			if (uni.getStorageSync('UserId') == '') {
+				uni.navigateTo({
+				    url: 'pages/register/register'
+				})
+			}
+		},
 		onHide: function() {}
 	}
 </script>

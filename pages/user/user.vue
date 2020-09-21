@@ -2,31 +2,31 @@
 	<view class="user-wrapper">
 		<view class="wrapper-header">
 			<image class="header" src="../../static/b.jpg"></image>
-			<view class="content">
+			<view class="content" v-if="totalData">
 				<view class="userinfo">
 					<image class="head" src="../../static/user.png"></image>
-					<text>18226626731</text>
+					<text>{{ totalData.userName }}</text>
 					<view class="medal">
-						<text>暂无</text>
+						<text>{{ totalData.carRank || '暂无' }}</text>
 						<image src="../../static/medal.png" mode=""></image>
 					</view>
 				</view>
 				<view class="list">
 					<view class="item">
 						<view class="title">总运量</view>
-						<view class="val">0千吨</view>
+						<view class="val">{{ totalData.totalFreightVolume }}千吨</view>
 					</view>
 					<view class="item">
 						<view class="title">总单数</view>
-						<view class="val">0单</view>
+						<view class="val">{{ totalData.totalDealOrder }}单</view>
 					</view>
 					<view class="item">
 						<view class="title">结算单数</view>
-						<view class="val">0单</view>
+						<view class="val">{{ totalData.totalSettlementOrder }}单</view>
 					</view>
 					<view class="item">
 						<view class="title">总运费</view>
-						<view class="val">0万</view>
+						<view class="val">{{ totalData.totalSettlementAmount }}万</view>
 					</view>
 				</view>
 			</view>
@@ -37,7 +37,7 @@
 				<text>个人信息</text>
 				<image class="right" src="../../static/icon/right.png"></image>
 			</view>
-			<view class="item">
+			<view class="item" @click="routeChange('/pages/money/money')">
 				<image src="../../static/icon/fee.png"></image>
 				<text>费用中心</text>
 				<image class="right" src="../../static/icon/right.png"></image>
@@ -49,14 +49,40 @@
 <script>
 export default {
 	data() {
-		return {}
+		return {
+			totalData: {}
+		}
 	},
 	methods: {
+		/**
+		 * 路由跳转
+		 */
 		routeChange (val) {
 			uni.navigateTo({
 			    url: val
 			})
+		},
+		/**
+		 * 个人信心
+		 */
+		getUserData () {
+			const self = this
+			uni.request({
+			    url: 'https://gswl.sx56yun.com/lps/webApp/getUserByUserId',
+			    data: {
+					userId: uni.getStorageSync('userId')
+				},
+				method: 'GET',
+			    success: ({ data }) => {
+					if (data.code == '200') {
+						self.totalData = data.result
+					}
+			    }
+			})
 		}
+	},
+	onShow() {
+		this.getUserData()
 	}
 }
 </script>
@@ -96,10 +122,10 @@ export default {
 					padding: 0 0 80rpx 0;
 					border-bottom: 1rpx dashed #ccc;
 					.head {
-						width: 140rpx;
-						height: 140rpx;
+						width: 120rpx;
+						height: 120rpx;
 						border-radius: 50%;
-						border: 10rpx solid #3c97de;
+						border: 5rpx solid #3c97de;
 						box-sizing: border-box;
 					}
 					text {
