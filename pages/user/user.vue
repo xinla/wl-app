@@ -63,17 +63,18 @@ export default {
 			})
 		},
 		/**
-		 * 个人信心
+		 * 个人信息
 		 */
 		getUserData () {
 			const self = this
 			uni.request({
-			    url: 'https://gswl.sx56yun.com/lps/webApp/getUserByUserId',
+			    url: '/lps/webApp/getUserByUserId',
 			    data: {
-					userId: uni.getStorageSync('userId')
+					userId: this.$store.state.userId
 				},
 				method: 'GET',
 			    success: ({ data }) => {
+					uni.hideLoading()
 					if (data.code == '200') {
 						self.totalData = data.result
 					}
@@ -81,7 +82,8 @@ export default {
 			})
 		}
 	},
-	onShow() {
+	onShow () {
+		uni.showLoading()
 		this.getUserData()
 	}
 }

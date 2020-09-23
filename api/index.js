@@ -10,7 +10,7 @@ driverName	姓名	String	是
 export function register(data) {
 	return http.request({
 		method: 'POST', // 请求方法必须大写
-		url: '/webApp/registerCarApp',
+		url: '/lps/webApp/registerCarApp',
 		data,
 	})
 }

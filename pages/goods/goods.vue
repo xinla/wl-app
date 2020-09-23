@@ -3,11 +3,9 @@
 		<view class="search-wrap">
 			<u-search placeholder="请输入货源号" v-model="keyword" @search="getData(1)" @custom="getData(1)"></u-search>
 		</view>
-
 		<view class="main">
 			<image src="@/static/a.jpg" mode=""></image>
 			<view class="list-wrap">
-
 				<view class="list" v-for="(item, index) of list" :key="index">
 					<view class="title flex">
 						<text>{{item.ownerCustomer}}</text>
@@ -64,14 +62,11 @@
 	.search-wrap {
 		padding: 18px 30rpx;
 	}
-
 	.main {
 		position: relative;
 		overflow: hidden;
-		padding: 0 18rpx 40rpx;
+		padding: 0 18rpx 20rpx;
 		background-color: #eee;
-
-		// background: #eee url(/static/a.jpg) no-repeat;
 		image {
 			position: absolute;
 			width: 100%;
@@ -79,11 +74,10 @@
 			left: 0;
 		}
 	}
-
 	.list-wrap {
 		position: relative;
 		margin-top: 260rpx;
-		height: calc(100vh - 580rpx);
+		height: calc(100vh - 416rpx);
 		overflow: auto;
 		z-index: 1;
 

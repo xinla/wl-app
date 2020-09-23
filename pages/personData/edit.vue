@@ -34,38 +34,50 @@
 			<view class="list">
 				<view class="title">与司机关系:</view>
 				<view class="val">
-					<label><radio value="家人" :checked="totalData.driverRelation == '家人'" />家人</label>
-					<label><radio value="雇主" :checked="totalData.driverRelation == '雇主'" />雇主</label>
+					<radio-group @change="radioChange">
+						<label><radio value="家人" :checked="totalData.driverRelation == '家人'" />家人</label>
+						<label><radio value="雇主" :checked="totalData.driverRelation == '雇主'" />雇主</label>
+					</radio-group>
 				</view>
 			</view>
 			<view class="list">
 				<view class="title">开户行所在城市:</view>
 				<view class="val">
-					<input type="text" v-model="totalData.driverName" placeholder="请输入">
+					<pick-regions :default-regions="defaultRegions" @getRegions="handleGetRegions">
+						<input v-model="totalData.openBankCity" class="uni-input" disabled placeholder="省市区县、乡镇等" />
+					</pick-regions>
 				</view>
 			</view>
 		</view>
-		<view class="submit">保存</view>
+		<view class="submit" @click="submitFunc">保存</view>
 	</view>
 </template>
 
 <script>
+	import pickRegions from '@/components/pick-regions/pick-regions.vue'
 	export default {
 		data() {
 			return {
 				id: '',
-				totalData: {}
+				totalData: {},
+				defaultRegions: ['安徽省', '合肥市', '包河区'],
 			}
+		},
+		components: {
+			pickRegions
 		},
 		onLoad(option) {
 			this.id = option.id
 			this.getData(option.id)
 		},
 		methods: {
+			/**
+			 * 获取数据
+			 */
 			getData(id) {
 				const self = this
 				uni.request({
-				    url: 'https://gswl.sx56yun.com/lps/webApp/getDriverInfo',
+				    url: '/lps/webApp/getDriverInfo',
 				    data: {
 						carId: id
 					},
@@ -76,6 +88,44 @@
 						}
 				    }
 				})
+			},
+			/**
+			 * 提交数据
+			 */
+			submitFunc () {
+				const self = this
+				uni.request({
+				    url: '/lps/webApp/updateDriver',
+				    data: {
+						driverRelation: self.totalData.driverRelation,
+						driver: self.totalData.driver,
+						carCode: self.totalData.carCode,
+						openBank: self.totalData.openBank,
+						openAccountName: self.totalData.openAccountName,
+						openBankCity: self.totalData.openBankCity,
+						driverName: self.totalData.driverName,
+						idNumber: self.totalData.idNumber,
+						accountNumber: self.totalData.accountNumber
+					},
+					method: 'POST',
+				    success: ({ data }) => {
+						if (data.code == '200') {
+							console.log(data)
+						}
+				    }
+				})
+			},
+			/**
+			 * 获取修改后的地址
+			 */
+			handleGetRegions (regions) {
+				this.totalData.openBankCity = regions.map(item => item.name).join('-')
+			},
+			/**
+			 * 切换与司机关系
+			 */
+			radioChange (val) {
+				this.totalData.driverRelation = val.detail.value
 			}
 		}
 	}
@@ -111,20 +161,12 @@
 					color: #666;
 					font-size: 24rpx;
 					text-align: right;
+					input {
+						font-size: 26rpx;
+					}
 					label {
 						margin: 0 0 0 20rpx;
 					}
-				}
-				.button {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					color: #fff;
-					font-size: 24rpx; 
-					width: 150rpx;
-					height: 45rpx;
-					border-radius: 5rpx;
-					background: #387ef7;
 				}
 			}
 		}

@@ -1,7 +1,7 @@
 <script>
 	export default {
-		onShow: function() {
-			if (uni.getStorageSync('userId') == '') {
+		onShow () {
+			if (!this.$store.state.userId) {
 				uni.navigateTo({
 				    url: '/pages/register/register'
 				})

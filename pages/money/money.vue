@@ -49,9 +49,9 @@ export default {
 		getData() {
 			const self = this
 			uni.request({
-			    url: 'https://gswl.sx56yun.com/lps/webApp/getCostInfoByPhone',
+			    url: '/lps/webApp/getCostInfoByPhone',
 			    data: {
-					userId: uni.getStorageSync('userId')
+					userId: this.$store.state.userId
 				},
 				method: 'GET',
 			    success: ({ data }) => {

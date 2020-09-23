@@ -7,12 +7,10 @@ const store = new Vuex.Store({
 		token: '',
 		avatarUrl: '',
 		userName: '',
-		userId: '5EEC2FBA637855286116'
+		userId: ''
 	},
 	mutations: {
 		login(state, provider) {
-			console.log(state)
-			console.log(provider)
 			state.login = true;
 			state.token = provider.token;
 			state.userName = provider.userName;
