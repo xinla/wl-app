@@ -1,7 +1,6 @@
 <template>
 	<view class="page">
 		<img class="logo" src="/static/a.jpg">
-
 		<view class="phone-wrap input-wrap">
 			<view class="label">
 				手机
@@ -16,7 +15,6 @@
 			<text v-if="isCoding" class="get-code">{{second}}后重新获取</text>
 			<text v-else class="get-code" @tap="getCode">获取短信验证码</text>
 		</view>
-
 		<view class="login ac">
 			注册/登录
 		</view>

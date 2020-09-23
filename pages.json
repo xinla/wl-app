@@ -67,8 +67,12 @@
 			"style": {
 				"navigationBarTitleText": "关联车辆"
 			}
-		}
-	    ,{
+		}, {
+            "path" : "pages/choise/choise",
+            "style": {
+            	"navigationBarTitleText": "选择车辆"
+            }
+        }, {
             "path" : "pages/money/money",
             "style": {
             	"navigationBarTitleText": "费用中心"
