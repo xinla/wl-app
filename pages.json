@@ -43,6 +43,11 @@
 				"navigationBarTitleText": "车辆列表"
 			}
 		}, {
+			"path": "pages/registerCar/registerCar",
+			"style": {
+				"navigationBarTitleText": "新增车辆"
+			}
+		}, {
 			"path": "pages/register/register",
 			"style": {
 				"navigationBarTitleText": "注册"
