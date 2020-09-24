@@ -12,7 +12,7 @@
 					<view class="info">扫码接单</view>
 				</view>
 			</view>
-			<view class="button" @click="routeChange('/pages/relateCar/relateCar')">新车注册</view>
+			<view class="button" @click="routeChange('/pages/registerCar/registerCar')">新车注册</view>
 			<view class="button" @click="routeChange('/pages/relateCar/relateCar')">关联已有车辆</view>
 		</view>
 	</view>
@@ -56,6 +56,11 @@ export default {
 					console.log(res)
 				})
 			})
+		},
+		routeChange(url) {
+			uni.navigateTo({
+				    url: url
+				})
 		}
 	}
 }
