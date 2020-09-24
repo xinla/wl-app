@@ -33,7 +33,7 @@
 				const self = this;
 				uni.showLoading();
 				uni.request({
-				    url: '/lps/webApp/registerCarApp',
+				    url: 'https://gswl.sx56yun.com/lps/webApp/registerCarApp',
 					data: self.form,
 					method: 'POST',
 				    success: ({ data }) => {
