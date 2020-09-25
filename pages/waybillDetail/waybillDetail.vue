@@ -22,7 +22,7 @@
 		startOrder
 	} from '@/api/index.js'
 	export default {
-		data() {
+		data () {
 			return {
 				form: {
 					sourceNum: '',
@@ -35,7 +35,7 @@
 				isMask: true, // 未完成的订单弹窗提示
 			}
 		},
-		onLoad(option) { //option为object类型，会序列化上个页面传递的参数
+		onLoad (option) { //option为object类型，会序列化上个页面传递的参数
 			this.getData(option.id)
 		},
 		methods: {
@@ -43,7 +43,6 @@
 				uni.showLoading({
 					title: '加载中...'
 				});
-				
 				getOrderByNum(id).then(r => {
 					this.form = r
 					uni.hideLoading();
@@ -51,7 +50,6 @@
 			},
 			submit() {
 				// todo 调接口 判断是否有未完成的订单
-				// this.isMask = false
 				startOrder(this.form.orderNumber).then(r => {
 					uni.showToast({
 						title: '操作成功',
