@@ -86,6 +86,14 @@
 					"target": "https://gswl.sx56yun.com",
 					"changeOrigin": true,
 					"secure": false
+				},
+				"https": {
+					"target": "https://gswl.sx56yun.com",
+					"changeOrigin": true,
+					"secure": false,
+					"pathRewrite": {
+						"^https://gswl.sx56yun.com": "" // 重写路径
+					}
 				}
 			}
 		}

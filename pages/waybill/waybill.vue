@@ -21,8 +21,11 @@
 					<view class="name info flex">
 						运输时间：{{item.operateDate}}
 						<view class="btn">
-							<u-button type="error" size="mini" shape="circle" :plain="true" @click="action(item.orderNumber)">撤销</u-button>
-							<u-button type="success" size="mini" shape="circle" :plain="true" @click="goDetail(item.orderNumber)">开始</u-button>
+							<u-button type="error" v-if="item.isComplete == 0" size="mini" shape="circle" :plain="true" @click="action(item.orderNumber)">撤销</u-button>
+							<u-button type="error" v-if="item.isComplete == 2" size="mini" shape="circle" :plain="true" @click="goDetail(item.orderNumber, 'finish')">结束</u-button>
+							<u-button v-if="item.isComplete == 0" type="success" size="mini" shape="circle" :plain="true" @click="goDetail(item.orderNumber, 'start')">开始</u-button>
+							<view v-else-if="item.isComplete == 1" style="color: #19BE6B; margin-right: 40rpx;">完成</view>
+							<view v-else-if="item.isComplete == 2" style="color:#F29100; margin-right: 40rpx;">运输中</view>
 						</view>
 					</view>
 				</view>
@@ -36,7 +39,7 @@
 	import {
 		getOrderByUserId,
 		revokeOrder,
-		startOrder
+		getOrderByNum
 	} from '@/api/index.js'
 	export default {
 		data() {
@@ -51,17 +54,28 @@
 		onShow() {
 			this.getData()
 		},
+		onLoad(option) { //option为object类型，会序列化上个页面传递的参数
+			this.getData(option.id)
+		},
 		methods: {
-			getData(page) {
+			getData(orderNumber) {
 				uni.showLoading({
 					title: '加载中...'
 				});
 
-				getOrderByUserId(this.$store.state.userId).then(r => {
-					this.list = r.Rows
-					uni.stopPullDownRefresh()
-					uni.hideLoading();
-				})
+				if (orderNumber) {
+					getOrderByNum(id).then(r => {
+						this.list = [r]
+						uni.stopPullDownRefresh()
+						uni.hideLoading();
+					})
+				} else {
+					getOrderByUserId(this.$store.state.userId).then(r => {
+						this.list = r.Rows
+						uni.stopPullDownRefresh()
+						uni.hideLoading();
+					})
+				}
 			},
 			action(id, type) {
 				revokeOrder(id).then(r => {
@@ -74,9 +88,9 @@
 					}, 1500)
 				})
 			},
-			goDetail(id) {
+			goDetail(id, type) {
 				uni.navigateTo({
-					url: '../waybillDetail/waybillDetail?id=' + id
+					url: '../waybillDetail/waybillDetail?id=' + id + '&type=' + type
 				})
 			}
 		}

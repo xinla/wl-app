@@ -73,17 +73,17 @@
 				"navigationBarTitleText": "关联车辆"
 			}
 		}, {
-            "path" : "pages/choise/choise",
-            "style": {
-            	"navigationBarTitleText": "选择车辆"
-            }
-        }, {
-            "path" : "pages/money/money",
-            "style": {
-            	"navigationBarTitleText": "费用中心"
-            }
-        }
-    ],
+			"path": "pages/choise/choise",
+			"style": {
+				"navigationBarTitleText": "选择车辆"
+			}
+		}, {
+			"path": "pages/money/money",
+			"style": {
+				"navigationBarTitleText": "费用中心"
+			}
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "xx物流",

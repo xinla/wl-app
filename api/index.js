@@ -127,10 +127,11 @@ export function startOrder(data) {
  * 结束运单
  * @param data 运单编号	String	是
  */
-export function endOrder(data) {
+export function endOrder(data, weight) {
 	return http.get('/manualPositioning/end', {
 		params: {
-			data
+			data,
+			weight
 		}
 	})
 }

@@ -41,6 +41,9 @@
 		onLoad() {
 			this.getData()
 		},
+		onPullDownRefresh() {
+			this.getData()
+		},
 		methods: {
 			getData(page) {
 				uni.showLoading({
