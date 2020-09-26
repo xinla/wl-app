@@ -35,7 +35,7 @@ export default {
 		getData() {
 			const self = this;
 			uni.request({
-				url: '/lps/webApp/getCarByUserId',
+				url: 'https://gswl.sx56yun.com/lps/webApp/getCarByUserId',
 				data: {
 					userId: this.$store.state.userId
 				},
@@ -51,16 +51,20 @@ export default {
 		 * 扫二维码
 		 */
 		scanFunc() {
-			this.$JsBridge.GetMethods(bridge => {
+			const self = this
+			self.$JsBridge.GetMethods(bridge => {
 				bridge.callHandler('scanCode', {}, res => {
-					console.log(res)
+					let Id = JSON.parse(res).data.split('/').pop()
+					uni.navigateTo({
+						url: `/pages/waybillDetail/waybillDetail?id=${Id}`
+					})
 				})
 			})
 		},
 		routeChange(url) {
 			uni.navigateTo({
-				    url: url
-				})
+				url: url
+			})
 		}
 	}
 }
