@@ -12,6 +12,17 @@ Vue.prototype.$JsBridge = JsBridge
 const IsIos = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
 Vue.prototype.$isIos = IsIos
 
+if (!IsIos) {
+  JsBridge.GetMethods(bridge => {
+    bridge.init(responseCallback => {
+      responseCallback(responseData)
+    })
+    bridge.registerHandler("dueWebCallNative", (data, responseCallback) => {
+      responseCallback(responseData)
+    })
+  })
+}
+
 Vue.config.productionTip = false
 
 App.mpType = 'app'

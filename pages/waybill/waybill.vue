@@ -1,7 +1,7 @@
 <template>
 	<view class="page">
 		<view class="search-wrap">
-			<u-search placeholder="请输入运单号" v-model="keyword" @search="getData(1)" @custom="getData(1)"></u-search>
+			<u-search placeholder="请输入运单号" v-model="keyword" @search="getData(keyword)" @custom="getData(keyword)"></u-search>
 		</view>
 		<view class="main">
 			<image src="@/static/a.jpg" mode=""></image>
@@ -44,7 +44,7 @@
 	export default {
 		data() {
 			return {
-				keywords: '',
+				keyword: '',
 				list: []
 			}
 		},
@@ -77,15 +77,14 @@
 					})
 				}
 			},
-			action(id, type) {
+			action(id) {
+				const self = this
 				revokeOrder(id).then(r => {
 					uni.showToast({
 						title: '操作成功',
 						duration: 1500
 					});
-					setTimeout(() => {
-						this.getData(1)
-					}, 1500)
+					self.getData()
 				})
 			},
 			goDetail(id, type) {
@@ -96,6 +95,7 @@
 		}
 	}
 </script>
+
 <style lang="scss" scoped>
 	.search-wrap {
 		padding: 18px 30rpx;

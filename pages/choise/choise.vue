@@ -35,7 +35,7 @@ export default {
 		getData() {
 			const self = this;
 			uni.request({
-				url: 'https://gswl.sx56yun.com/lps/webApp/getCarByUserId',
+				url: '/lps/webApp/getCarByUserId',
 				data: {
 					userId: this.$store.state.userId
 				},
