@@ -59,8 +59,7 @@ userId	用户主键	String	是
 开户城市：到省市级名称；格式 ["北京市", "北京市"]
  */
 export function registerCarInfoApp(data) {
-	return http.post('/webApp/registerCarInfoApp', data
-	)
+	return http.post('/webApp/registerCarInfoApp', data)
 }
 
 /**
@@ -95,7 +94,7 @@ export function goodsSourceXC(params) {
  */
 export function getOrderByUserId(userId) {
 	return http.post('/webApp/getOrderByUserId', {
-			userId
+		userId
 	})
 }
 

@@ -61,7 +61,7 @@
 			getDetails(id) {
 				const self = this
 				uni.request({
-				    url: '/lps/webApp/getDriverInfo',
+				    url: 'https://gswl.sx56yun.com/lps/webApp/getDriverInfo',
 				    data: {
 						carId: id
 					},

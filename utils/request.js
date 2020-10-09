@@ -2,7 +2,7 @@ import Request from '@/js_sdk/luch-request/index.js'
 
 const http = new Request()
 
-http.config.baseURL = '/lps'
+http.config.baseURL = 'https://gswl.sx56yun.com/'
 
 http.interceptors.response.use((response) => { /* 对响应成功做点什么 可使用async await 做异步操作*/
 	let data = response.data

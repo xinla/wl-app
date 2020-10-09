@@ -77,7 +77,7 @@
 			getData(id) {
 				const self = this
 				uni.request({
-				    url: '/lps/webApp/getDriverInfo',
+				    url: 'https://gswl.sx56yun.com/lps/webApp/getDriverInfo',
 				    data: {
 						carId: id
 					},
@@ -95,7 +95,7 @@
 			submitFunc () {
 				const self = this
 				uni.request({
-				    url: '/lps/webApp/updateDriver',
+				    url: 'https://gswl.sx56yun.com/lps/webApp/updateDriver',
 				    data: {
 						driverRelation: self.totalData.driverRelation,
 						driver: self.totalData.driver,

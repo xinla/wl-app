@@ -36,7 +36,7 @@
 			getData() {
 				const self = this
 				uni.request({
-				    url: '/lps/webApp/getCarByUserId',
+				    url: 'https://gswl.sx56yun.com/lps/webApp/getCarByUserId',
 				    data: {
 						userId: this.$store.state.userId
 					},

@@ -86,18 +86,10 @@
                     "target" : "https://gswl.sx56yun.com",
                     "changeOrigin" : true,
                     "secure" : false
-                },
-                "https" : {
-                    "target" : "https://gswl.sx56yun.com",
-                    "changeOrigin" : true,
-                    "secure" : false,
-                    "pathRewrite" : {
-                        "^https://gswl.sx56yun.com" : "" // 重写路径
-                    }
                 }
             }
         },
-        "title" : "广顺 物流",
+        "title" : "广顺物流",
         "router" : {
             "mode" : "hash",
             "base" : "/gswl/"

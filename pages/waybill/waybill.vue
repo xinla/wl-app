@@ -59,15 +59,11 @@
 		},
 		methods: {
 			getData(orderNumber) {
-				uni.showLoading({
-					title: '加载中...'
-				});
 
 				if (orderNumber) {
 					getOrderByNum(id).then(r => {
 						this.list = [r]
 						uni.stopPullDownRefresh()
-						uni.hideLoading();
 					})
 				} else {
 					getOrderByUserId(this.$store.state.userId).then(r => {

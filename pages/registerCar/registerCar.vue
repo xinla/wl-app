@@ -100,8 +100,6 @@
 				uni.uploadFile({
 					url: 'https://gswl.sx56yun.com/lps/webApp/upLoadCardImg',
 					files: files,
-					// filePath: files[0].url,
-					// name: 'file',
 					formData: {
 						imgType: index,
 						driverName: this.form.driverName,
