@@ -37,7 +37,6 @@
 
 <script>
 	import {
-		getOrderByUserId,
 		revokeOrder,
 		getOrderByNum
 	} from '@/api/index.js'
@@ -54,22 +53,32 @@
 		onShow() {
 			this.getData()
 		},
-		onLoad(option) { //option为object类型，会序列化上个页面传递的参数
+		onLoad(option) {
 			this.getData(option.id)
 		},
 		methods: {
 			getData(orderNumber) {
-
+				const self = this
 				if (orderNumber) {
 					getOrderByNum(id).then(r => {
 						this.list = [r]
 						uni.stopPullDownRefresh()
 					})
 				} else {
-					getOrderByUserId(this.$store.state.userId).then(r => {
-						this.list = r.Rows
-						uni.stopPullDownRefresh()
-						uni.hideLoading();
+					uni.request({
+					    url: 'https://gswl.sx56yun.com/webApp/getOrderByUserId',
+					    data: {
+							userId: self.$store.state.userId
+						},
+						method: 'POST',
+					    success: ({ data }) => {
+							console.log(data)
+							uni.hideLoading()
+							uni.stopPullDownRefresh()
+							if (data.code == '200') {
+								this.list = data.Rows
+							}
+					    }
 					})
 				}
 			},
@@ -96,14 +105,11 @@
 	.search-wrap {
 		padding: 18px 30rpx;
 	}
-
 	.main {
 		position: relative;
 		overflow: hidden;
 		padding: 0 18rpx 20rpx;
 		background-color: #eee;
-
-		// background: #eee url(/static/a.jpg) no-repeat;
 		image {
 			position: absolute;
 			width: 100%;
@@ -111,14 +117,12 @@
 			left: 0;
 		}
 	}
-
 	.list-wrap {
 		position: relative;
 		margin-top: 260rpx;
 		height: calc(100vh - 416rpx);
 		overflow: auto;
 		z-index: 1;
-
 		.list {
 			font-size: 24rpx;
 			border-radius: 16rpx;
@@ -126,23 +130,18 @@
 			margin-bottom: 20rpx;
 			background-color: #fff;
 		}
-
 		.title {
 			font-weight: 600;
 		}
-
 		.address {
 			margin: 20rpx 0 40rpx;
 		}
-
 		.to {
 			padding: 0 20rpx;
 		}
-
 		.info {
 			color: #bbb;
 		}
-
 		/deep/.u-btn {
 			margin-left: 30rpx;
 			padding: 0 40rpx;
