@@ -74,7 +74,6 @@ export default {
 				},
 				method: 'GET',
 			    success: ({ data }) => {
-					uni.hideLoading()
 					if (data.code == '200') {
 						self.totalData = data.result
 					}
@@ -83,7 +82,6 @@ export default {
 		}
 	},
 	onShow () {
-		uni.showLoading()
 		this.getUserData()
 	}
 }

@@ -1,6 +1,8 @@
 <template>
 	<view class="page">
-		<view class="search-wrap"><u-search placeholder="请输入货源号" v-model="keyword" @search="getData(1)" @custom="getData(1)"></u-search></view>
+		<view class="search-wrap">
+			<u-search placeholder="请输入货源号" v-model="keyword" @search="getData(1)" @custom="getData(1)"></u-search>
+		</view>
 		<view class="main">
 			<image src="@/static/a.jpg" mode=""></image>
 			<view class="list-wrap">
@@ -41,14 +43,17 @@ export default {
 	},
 	methods: {
 		getData(page) {
-			uni.showLoading({
-				title: '加载中...'
-			});
-			goodsSourceXC().then(r => {
-				this.list = r.Rows;
-				uni.stopPullDownRefresh();
-				uni.hideLoading();
-			});
+			const self = this
+			uni.request({
+			    url: 'https://gswl.sx56yun.com/lps/front/goodsSourceXC',
+			    data: {},
+				method: 'GET',
+			    success: ({ data }) => {
+					if (data.code == '200') {
+						this.list = data.result.Rows
+					}
+			    }
+			})
 		},
 		routeChange (val) {
 			uni.navigateTo({
@@ -56,7 +61,7 @@ export default {
 			})
 		}
 	}
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -6,7 +6,6 @@
 		<view class="main">
 			<image src="@/static/a.jpg" mode=""></image>
 			<view class="list-wrap">
-
 				<view class="list" v-for="(item, index) of list" :key="index">
 					<view class="title flex">
 						<text>{{item.ownerCustomer}}</text>
@@ -29,7 +28,6 @@
 						</view>
 					</view>
 				</view>
-
 			</view>
 		</view>
 	</view>
@@ -66,14 +64,13 @@
 					})
 				} else {
 					uni.request({
-					    url: 'https://gswl.sx56yun.com/webApp/getOrderByUserId',
+					    url: 'https://gswl.sx56yun.com/lps/webApp/getOrderByUserId',
 					    data: {
 							userId: self.$store.state.userId
 						},
 						method: 'POST',
 					    success: ({ data }) => {
 							console.log(data)
-							uni.hideLoading()
 							uni.stopPullDownRefresh()
 							if (data.code == '200') {
 								this.list = data.Rows
@@ -88,7 +85,7 @@
 					uni.showToast({
 						title: '操作成功',
 						duration: 1500
-					});
+					})
 					self.getData()
 				})
 			},

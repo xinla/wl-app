@@ -87,12 +87,16 @@
                     "changeOrigin" : true,
                     "secure" : false
                 }
-            }
+            },
+            "https" : true
         },
         "title" : "广顺物流",
         "router" : {
             "mode" : "hash",
             "base" : "/gswl/"
+        },
+        "sdkConfigs" : {
+            "maps" : {}
         }
     }
 }
