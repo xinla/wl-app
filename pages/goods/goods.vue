@@ -6,7 +6,7 @@
 		<view class="main">
 			<image src="@/static/a.jpg" mode=""></image>
 			<view class="list-wrap">
-				<view class="list" v-for="(item, index) of list" :key="index" @click="routeChange('/pages/choise/choise')">
+				<view class="list" v-for="(item, index) of list" :key="index">
 					<view class="title flex">
 						<text>{{ item.ownerCustomer }}</text>
 						<text>{{ item.orderNumber }}</text>
@@ -18,7 +18,7 @@
 					</view>
 					<view class="name info flex">
 						货物名称：{{ item.goodsName || '无' }}
-						<view class="btn"><u-button type="success" size="mini" shape="circle" :plain="true">扫码接单</u-button></view>
+						<view class="btn"><u-button type="success" size="mini" shape="circle" :plain="true" @click="routeChange('/pages/choise/choise')">扫码接单</u-button></view>
 					</view>
 				</view>
 			</view>

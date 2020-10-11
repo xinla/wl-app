@@ -58,10 +58,23 @@
 			getData(orderNumber) {
 				const self = this
 				if (orderNumber) {
-					getOrderByNum(id).then(r => {
-						this.list = [r]
-						uni.stopPullDownRefresh()
+					uni.request({
+					    url: 'https://gswl.sx56yun.com/lps//webApp/getOrderByNum',
+					    data: {
+							orderNumber: orderNumber
+						},
+						method: 'GET',
+					    success: ({ data }) => {
+							uni.stopPullDownRefresh()
+							if (data.code == '200') {
+								this.list = [r]
+							}
+					    }
 					})
+					// getOrderByNum(id).then(r => {
+					// 	this.list = [r]
+					// 	uni.stopPullDownRefresh()
+					// })
 				} else {
 					uni.request({
 					    url: 'https://gswl.sx56yun.com/lps/webApp/getOrderByUserId',
@@ -70,7 +83,6 @@
 						},
 						method: 'POST',
 					    success: ({ data }) => {
-							console.log(data)
 							uni.stopPullDownRefresh()
 							if (data.code == '200') {
 								this.list = data.Rows
