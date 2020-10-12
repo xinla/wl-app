@@ -19,12 +19,12 @@
 					</view>
 					<view class="name info flex">
 						运输时间：{{item.operateDate}}
-						<view class="btn">
+						<view class="btn btn-box">
 							<u-button type="error" v-if="item.isComplete == 0" size="mini" shape="circle" :plain="true" @click="action(item.orderNumber)">撤销</u-button>
 							<u-button type="error" v-if="item.isComplete == 2" size="mini" shape="circle" :plain="true" @click="goDetail(item.orderNumber, 'finish')">结束</u-button>
 							<u-button v-if="item.isComplete == 0" type="success" size="mini" shape="circle" :plain="true" @click="goDetail(item.orderNumber, 'start')">开始</u-button>
-							<view v-else-if="item.isComplete == 1" style="color: #19BE6B; margin-right: 40rpx;">完成</view>
-							<view v-else-if="item.isComplete == 2" style="color:#F29100; margin-right: 40rpx;">运输中</view>
+							<view v-else-if="item.isComplete == 1" style="color: #19BE6B;">完成</view>
+							<view v-else-if="item.isComplete == 2" style="color:#F29100;">运输中</view>
 						</view>
 					</view>
 				</view>
@@ -85,7 +85,7 @@
 					    success: ({ data }) => {
 							uni.stopPullDownRefresh()
 							if (data.code == '200') {
-								this.list = data.Rows
+								this.list = data.result.Rows
 							}
 					    }
 					})
@@ -154,6 +154,12 @@
 		/deep/.u-btn {
 			margin-left: 30rpx;
 			padding: 0 40rpx;
+		}
+		.btn-box {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			width: 300rpx;
 		}
 	}
 </style>

@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import { startOrder, endOrder } from '@/api/index.js'
 export default {
 	data() {
 		return {
@@ -46,6 +45,7 @@ export default {
 	onLoad(option) {
 		// option为object类型，会序列化上个页面传递的参数
 		this.getData(option.id)
+		this.orderNumber = option.id
 		this.type = option.type
 	},
 	methods: {
@@ -72,7 +72,7 @@ export default {
 			uni.request({
 				url: 'https://gswl.sx56yun.com/lps/manualPositioning/start',
 				data: {
-					data: self.orderNumber
+					data: String(self.orderNumber)
 				},
 				method: 'GET',
 				success: ({ data }) => {
@@ -87,19 +87,28 @@ export default {
 			})
 		},
 		submit() {
+			const self = this
 			if (this.type === 'finish') {
 				// 停运
 				this.$JsBridge.GetMethods(bridge => {
 					bridge.callHandler('stopTransport', {}, res => {})
 				})
-				endOrder(this.form.orderNumber, this.weight).then(r => {
-					uni.showToast({
-						title: '已完成',
-						duration: 2000
-					})
-					uni.navigateTo({
-						url: '/pages/waybill/waybill'
-					})
+				uni.request({
+					url: 'https://gswl.sx56yun.com/lps/manualPositioning/end',
+					data: {
+						data: String(self.orderNumber),
+						weight: String(self.weight)
+					},
+					method: 'GET',
+					success: r => {
+						uni.showToast({
+							title: '已完成',
+							duration: 2000
+						})
+						uni.navigateTo({
+							url: '/pages/waybill/waybill'
+						})
+					}
 				})
 			}
 		}
