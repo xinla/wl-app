@@ -37,13 +37,18 @@ export default {
 				originatingPlace: '',
 				destination: ''
 			},
-			// isMask: false, // 未完成的订单弹窗提示
+			/**
+			 * 未完成的订单弹窗提示
+			 */
+			// isMask: false,
 			type: '',
 			weight: 0
 		};
 	},
 	onLoad(option) {
-		// option为object类型，会序列化上个页面传递的参数
+		/**
+		 * option为object类型，会序列化上个页面传递的参数
+		 */
 		this.getData(option.id)
 		this.orderNumber = option.id
 		this.type = option.type
@@ -65,7 +70,9 @@ export default {
 		upload(files, index) {},
 		getLocationFunc() {
 			const self = this
-			// 启运
+			/**
+			 * 启运
+			 */
 			self.$JsBridge.GetMethods(bridge => {
 				bridge.callHandler('startTransport', {}, res => {})
 			})
@@ -77,11 +84,12 @@ export default {
 				method: 'GET',
 				success: ({ data }) => {
 					uni.showToast({
+						icon: 'none',
 						title: '运单已建成',
 						duration: 2000
 					})
-					uni.navigateTo({
-						url: '../waybill/waybill'
+					uni.switchTab({
+						url: '/pages/waybill/waybill'
 					})
 				}
 			})
@@ -89,7 +97,9 @@ export default {
 		submit() {
 			const self = this
 			if (this.type === 'finish') {
-				// 停运
+				/**
+				 * 停运
+				 */
 				this.$JsBridge.GetMethods(bridge => {
 					bridge.callHandler('stopTransport', {}, res => {})
 				})
@@ -102,12 +112,15 @@ export default {
 					method: 'GET',
 					success: r => {
 						uni.showToast({
+							icon: 'none',
 							title: '已完成',
-							duration: 2000
+							duration: 1000
 						})
-						uni.navigateTo({
-							url: '/pages/waybill/waybill'
-						})
+						setTimeout(() => {
+							uni.switchTab({
+								url: '/pages/waybill/waybill'
+							})
+						}, 1000)
 					}
 				})
 			}

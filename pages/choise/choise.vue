@@ -22,11 +22,13 @@
 export default {
 	data() {
 		return {
+			orderId: '',
 			totalData: []
 		};
 	},
-	onLoad() {
-		this.getData();
+	onLoad(option) {
+		this.orderId = option.id
+		this.getData()
 	},
 	methods: {
 		/**
@@ -52,14 +54,20 @@ export default {
 		 */
 		scanFunc() {
 			const self = this
-			self.$JsBridge.GetMethods(bridge => {
-				bridge.callHandler('scanCode', {}, res => {
-					let Id = JSON.parse(res).data.split('/').pop()
-					uni.navigateTo({
-						url: `/pages/waybillDetail/waybillDetail?id=${Id}`
+			if (self.orderId) {
+				uni.navigateTo({
+					url: `/pages/waybillDetail/waybillDetail?id=${self.orderId}`
+				})
+			} else {
+				self.$JsBridge.GetMethods(bridge => {
+					bridge.callHandler('scanCode', {}, res => {
+						let Id = JSON.parse(res).data.split('/').pop()
+						uni.navigateTo({
+							url: `/pages/waybillDetail/waybillDetail?id=${Id}`
+						})
 					})
 				})
-			})
+			}
 		},
 		routeChange(url) {
 			uni.navigateTo({

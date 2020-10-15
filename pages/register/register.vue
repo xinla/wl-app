@@ -41,7 +41,7 @@
 							uni.stopPullDownRefresh()
 							uni.hideLoading();
 							self.$store.commit('login', data.record)
-							// localStorage.setItem('userId', data.record.id )
+							localStorage.setItem('userData', JSON.stringify(data.record) )
 							uni.switchTab({
 							    url: '/pages/index/index'
 							})
