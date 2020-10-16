@@ -23,20 +23,33 @@ export default {
 		return {
 			form: {
 				phoneNumber: '',
-				carCode: '',
-				userCode: '',
+				carCode: ''
 			}
 		};
 	},
 	methods: {
 		submit() {
 			uni.showLoading();
-			this.form.userCode = this.$store.state.userId
-			getRelationCar(this.form).then(r => {
-				uni.hideLoading();
-				uni.navigateBack({
-				    delta: 1
-				})
+			uni.request({
+				url: 'https://gswl.sx56yun.com/lps/webApp/getRelationCar',
+				data: Object.assign(this.form, {
+					userCode: this.$store.state.userId
+				}),
+				method: 'GET',
+				success: r => {
+					console.log(r)
+					uni.showToast({
+						icon: 'none',
+						duration: 1000,
+						title: r.data.msg
+					})
+					uni.hideLoading()
+					setTimeout(() => {
+						uni.navigateBack({
+						    delta: 1
+						})
+					}, 1000)
+				}
 			})
 		}
 	}
