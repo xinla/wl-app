@@ -50,6 +50,7 @@
 export default {
 	data() {
 		return {
+			userId: '',
 			totalData: {}
 		}
 	},
@@ -70,7 +71,7 @@ export default {
 			uni.request({
 			    url: 'https://gswl.sx56yun.com/lps/webApp/getUserByUserId',
 			    data: {
-					userId: this.$store.state.userId
+					userId: self.$store.state.userId || self.userId
 				},
 				method: 'GET',
 			    success: ({ data }) => {
@@ -82,6 +83,7 @@ export default {
 		}
 	},
 	onShow () {
+		this.userId = JSON.parse(localStorage.getItem('userData')).id
 		this.getUserData()
 	}
 }

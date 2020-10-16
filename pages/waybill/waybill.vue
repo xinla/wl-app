@@ -51,9 +51,6 @@
 		onShow() {
 			this.getData()
 		},
-		onLoad(option) {
-			this.getData(option.id)
-		},
 		methods: {
 			getData(orderNumber) {
 				const self = this
@@ -71,10 +68,6 @@
 							}
 					    }
 					})
-					// getOrderByNum(id).then(r => {
-					// 	this.list = [r]
-					// 	uni.stopPullDownRefresh()
-					// })
 				} else {
 					uni.request({
 					    url: 'https://gswl.sx56yun.com/lps/webApp/getOrderByUserId',
