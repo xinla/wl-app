@@ -29,7 +29,7 @@
 					<regionPicker @selecteRegion_="selecteProvinceCity" :column_="2" />
 				</u-form-item>
 				<u-form-item label="与司机关系">
-					<u-radio-group v-model="radio" :wrap="true">
+					<u-radio-group v-model="form.driverRelation" :wrap="true">
 						<u-radio v-for="(item, index) in radioList" :key="index" :name="item">
 							{{ item }}
 						</u-radio>
@@ -125,7 +125,7 @@
 				const self = this;
 				uni.showLoading();
 				uni.request({
-					url: 'https://gswl.sx56yun.com/lps/webApp/registerCarApp',
+					url: 'https://gswl.sx56yun.com/lps/webApp/registerCarInfoApp',
 					data: self.form,
 					method: 'POST',
 					success: ({
