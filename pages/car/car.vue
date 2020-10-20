@@ -15,7 +15,6 @@
 					</view>
 				</view>
 			</view>
-
 		</view>
 
 		<u-button type="primary" @click="goDetail()">关联车辆信息</u-button>

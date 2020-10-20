@@ -7,7 +7,7 @@
 					<view class="number">{{ item.carCode }}</view>
 					<view class="time">注册时间：{{ item.operateDate }}</view>
 				</view>
-				<view class="right" @click="scanFunc">
+				<view class="right" @click="scanFunc(item)">
 					<view class="rank">【{{ item.phoneNumber || '暂无' }}】</view>
 					<view class="info">扫码接单</view>
 				</view>
@@ -52,9 +52,23 @@ export default {
 		/**
 		 * 扫二维码
 		 */
-		scanFunc() {
+		scanFunc(data) {
 			const self = this
 			if (self.orderId) {
+				uni.request({
+					url: 'https://gswl.sx56yun.com/lps/webApp/login',
+					data: {
+						carCode: data.carCode,
+						phoneNumber: data.phoneNumber,
+						sourceId: self.orderId
+					},
+					method: 'POST',
+					success: ({ data }) => {
+						console.log(data)
+						if (data.code == '200') {
+						}
+					}
+				})
 				uni.navigateTo({
 					url: `/pages/waybillDetail/waybillDetail?id=${self.orderId}`
 				})

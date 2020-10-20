@@ -18,7 +18,7 @@
 					</view>
 					<view class="name info flex">
 						货物名称：{{ item.goodsName || '无' }}
-						<view class="btn"><u-button type="success" size="mini" shape="circle" :plain="true" @click="routeChange(`/pages/choise/choise?id=${item.orderNumber}`)">扫码接单</u-button></view>
+						<view class="btn"><u-button type="success" size="mini" shape="circle" :plain="true" @click="routeChange(`/pages/choise/choise?id=${item.pkOrder}`)">扫码接单</u-button></view>
 					</view>
 				</view>
 			</view>

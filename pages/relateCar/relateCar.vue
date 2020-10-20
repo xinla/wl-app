@@ -36,19 +36,26 @@ export default {
 					userCode: this.$store.state.userId
 				}),
 				method: 'GET',
-				success: r => {
-					console.log(r)
-					uni.showToast({
-						icon: 'none',
-						duration: 1000,
-						title: r.data.msg
-					})
-					uni.hideLoading()
-					setTimeout(() => {
-						uni.navigateBack({
-						    delta: 1
+				success: res => {
+					if (res.statusCode && res.data.code == 200) {
+						uni.hideLoading()
+						uni.showToast({
+							icon: 'none',
+							duration: 1000,
+							title: res.data.msg
 						})
-					}, 1000)
+						setTimeout(() => {
+							uni.navigateBack({
+							    delta: 1
+							})
+						}, 1000)
+					} else {
+						uni.showToast({
+							icon: 'none',
+							duration: 1000,
+							title: res.data.msg
+						})
+					}
 				}
 			})
 		}
