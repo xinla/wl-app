@@ -55,29 +55,26 @@ export default {
 		scanFunc(data) {
 			const self = this
 			if (self.orderId) {
-				uni.request({
-					url: 'https://gswl.sx56yun.com/lps/webApp/login',
-					data: {
-						carCode: data.carCode,
-						phoneNumber: data.phoneNumber,
-						sourceId: self.orderId
-					},
-					method: 'POST',
-					success: ({ data }) => {
-						console.log(data)
-						if (data.code == '200') {
-						}
-					}
-				})
 				uni.navigateTo({
-					url: `/pages/waybillDetail/waybillDetail?id=${self.orderId}`
+					url: `/pages/car/list?carCode=${data.carCode}&phone=${data.phoneNumber}&sourceId=${self.orderId}`
 				})
 			} else {
 				self.$JsBridge.GetMethods(bridge => {
 					bridge.callHandler('scanCode', {}, res => {
 						let Id = JSON.parse(res).data.split('/').pop()
-						uni.navigateTo({
-							url: `/pages/waybillDetail/waybillDetail?id=${Id}`
+						uni.request({
+							url: 'https://gswl.sx56yun.com/lps/webApp/login',
+							data: {
+								carCode: data.carCode,
+								phoneNumber: data.phone,
+								sourceId: Id
+							},
+							method: 'POST',
+							success: ({ data }) => {
+								uni.navigateTo({
+									url: `/pages/waybillDetail/waybillDetail?id=${Id}`
+								})
+							}
 						})
 					})
 				})
