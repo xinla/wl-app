@@ -73,9 +73,9 @@ export default {
 			/**
 			 * 启运
 			 */
-			self.$JsBridge.GetMethods(bridge => {
-				bridge.callHandler('startTransport', {}, res => {})
-			})
+			// self.$JsBridge.GetMethods(bridge => {
+			// 	bridge.callHandler('startTransport', {}, res => {})
+			// })
 			uni.request({
 				url: 'https://gswl.sx56yun.com/lps/manualPositioning/start',
 				data: {
@@ -100,9 +100,9 @@ export default {
 				/**
 				 * 停运
 				 */
-				this.$JsBridge.GetMethods(bridge => {
-					bridge.callHandler('stopTransport', {}, res => {})
-				})
+				// this.$JsBridge.GetMethods(bridge => {
+				// 	bridge.callHandler('stopTransport', {}, res => {})
+				// })
 				uni.request({
 					url: 'https://gswl.sx56yun.com/lps/manualPositioning/end',
 					data: {

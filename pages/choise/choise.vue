@@ -62,19 +62,8 @@ export default {
 				self.$JsBridge.GetMethods(bridge => {
 					bridge.callHandler('scanCode', {}, res => {
 						let Id = JSON.parse(res).data.split('/').pop()
-						uni.request({
-							url: 'https://gswl.sx56yun.com/lps/webApp/login',
-							data: {
-								carCode: data.carCode,
-								phoneNumber: data.phone,
-								sourceId: Id
-							},
-							method: 'POST',
-							success: ({ data }) => {
-								uni.navigateTo({
-									url: `/pages/waybillDetail/waybillDetail?id=${Id}`
-								})
-							}
+						uni.navigateTo({
+							url: `/pages/car/list?carCode=${data.carCode}&phone=${data.phoneNumber}&sourceId=${Id}`
 						})
 					})
 				})
