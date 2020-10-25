@@ -8,7 +8,7 @@
 			<u-cell-item title="起始地" :value="form.originatingPlace" :arrow="false"></u-cell-item>
 			<u-cell-item title="目的地" :value="form.destination" :arrow="false"></u-cell-item>
 		</u-cell-group>
-		<button class="start" @click="getLocationFunc" type="primary" v-if="!type || type == 'start'">开始</button>
+		<button class="start" @click="getLocationFunc" type="primary" v-if="!type || type == 'start'">确认运单</button>
 		<view class="content" v-if="type === 'finish'">
 			<u-form :model="form" ref="uForm">
 				<u-form-item label="货物净重(吨) " label-width="auto"><u-input v-model="weight" placeholder="请输入货物净重(吨)" /></u-form-item>
@@ -85,12 +85,14 @@ export default {
 				success: ({ data }) => {
 					uni.showToast({
 						icon: 'none',
-						title: '运单已建成',
-						duration: 2000
+						title: '运单已生成',
+						duration: 1000
 					})
-					uni.switchTab({
-						url: '/pages/waybill/waybill'
-					})
+					setTimeout(() => {
+						uni.switchTab({
+							url: '/pages/waybill/waybill'
+						})
+					}, 1000)
 				}
 			})
 		},

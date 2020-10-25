@@ -1,10 +1,15 @@
 <script>
 export default {
 	onShow() {
-		if (!this.$store.state.userId) {
+		if (!this.$store.state.userId && !localStorage.getItem('userData')) {
 			uni.navigateTo({
 				url: '/pages/register/register'
-			});
+			})
+		} else {
+			this.$store.commit('login', JSON.parse(localStorage.getItem('userData')))
+			uni.switchTab({
+			    url: '/pages/index/index'
+			})
 		}
 	}
 };
