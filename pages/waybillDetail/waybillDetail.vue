@@ -11,13 +11,15 @@
 		<button class="start" @click="getLocationFunc" type="primary" v-if="!type || type == 'start'">确认运单</button>
 		<view class="content" v-if="type === 'finish'">
 			<u-form :model="form" ref="uForm">
-				<u-form-item label="货物净重(吨) " label-width="auto"><u-input v-model="weight" placeholder="请输入货物净重(吨)" /></u-form-item>
-				<u-form-item :border-bottom="false">
-					<view style="color: red;font-size: 26rpx;">
-						请上传清晰可辨认的图片，否则影响后期运费支付！
-					</view>
+				<u-form-item label="货物净重(吨) " label-width="auto">
+					<u-input v-model="weight" placeholder="输入净重" />
 				</u-form-item>
-				<u-form-item label="榜单"><u-upload max-count="1" :auto-upload="false" @on-choose-complete="upload" index="2"></u-upload></u-form-item>
+				<u-form-item :border-bottom="false">
+					<view style="color: red;font-size: 26rpx;">请上传清晰可辨认的图片，否则影响后期运费支付！</view>
+				</u-form-item>
+				<u-form-item label="榜单">
+					<u-upload max-count="1" :auto-upload="false" @on-choose-complete="upload" index="2"></u-upload>
+				</u-form-item>
 			</u-form>
 			<u-button type="primary" @click="submit">结束</u-button>
 		</view>
@@ -42,20 +44,20 @@ export default {
 			 */
 			// isMask: false,
 			type: '',
-			weight: 0
+			weight: ''
 		};
 	},
 	onLoad(option) {
 		/**
 		 * option为object类型，会序列化上个页面传递的参数
 		 */
-		this.getData(option.id)
-		this.orderNumber = option.id
-		this.type = option.type
+		this.getData(option.id);
+		this.orderNumber = option.id;
+		this.type = option.type;
 	},
 	methods: {
 		getData(id) {
-			const self = this
+			const self = this;
 			uni.request({
 				url: 'https://gswl.sx56yun.com/lps/webApp/getOrderByNum',
 				data: {
@@ -63,13 +65,15 @@ export default {
 				},
 				method: 'GET',
 				success: ({ data }) => {
-					self.form = data.result
+					self.form = data.result;
 				}
-			})
+			});
 		},
-		upload(files, index) {},
+		upload(files, index) {
+			console.log(files)
+		},
 		getLocationFunc() {
-			const self = this
+			const self = this;
 			/**
 			 * 启运
 			 */
@@ -87,17 +91,17 @@ export default {
 						icon: 'none',
 						title: '运单已生成',
 						duration: 1000
-					})
+					});
 					setTimeout(() => {
 						uni.switchTab({
 							url: '/pages/waybill/waybill'
-						})
-					}, 1000)
+						});
+					}, 1000);
 				}
-			})
+			});
 		},
 		submit() {
-			const self = this
+			const self = this;
 			if (this.type === 'finish') {
 				/**
 				 * 停运
@@ -117,18 +121,18 @@ export default {
 							icon: 'none',
 							title: '已完成',
 							duration: 1000
-						})
+						});
 						setTimeout(() => {
 							uni.switchTab({
 								url: '/pages/waybill/waybill'
-							})
-						}, 1000)
+							});
+						}, 1000);
 					}
-				})
+				});
 			}
 		}
 	}
-}
+};
 </script>
 
 <style lang="less" scoped>
