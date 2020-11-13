@@ -55,6 +55,7 @@ export default {
 		scanFunc(data) {
 			const self = this
 			if (self.orderId) {
+				console.log(self.orderId)
 				uni.navigateTo({
 					url: `/pages/car/list?carCode=${data.carCode}&phone=${data.phoneNumber}&sourceId=${self.orderId}`
 				})

@@ -17,8 +17,11 @@
 				<u-form-item :border-bottom="false">
 					<view style="color: red;font-size: 26rpx;">请上传清晰可辨认的图片，否则影响后期运费支付！</view>
 				</u-form-item>
-				<u-form-item label="榜单">
-					<u-upload max-count="1" :auto-upload="false" @on-choose-complete="upload" index="2"></u-upload>
+				<u-form-item label="磅单">
+					<view class="image">
+						<image class="icon" v-if="type == 'finish' && !imgSrc" src="../../static/add.png" @click="submitImg"></image>
+						<image class="img" v-else :src="imgSrc"></image>
+					</view>
 				</u-form-item>
 			</u-form>
 			<u-button type="primary" @click="submit">结束</u-button>
@@ -44,7 +47,8 @@ export default {
 			 */
 			// isMask: false,
 			type: '',
-			weight: ''
+			weight: '',
+			imgSrc: ''
 		};
 	},
 	onLoad(option) {
@@ -68,9 +72,6 @@ export default {
 					self.form = data.result;
 				}
 			});
-		},
-		upload(files, index) {
-			console.log(files)
 		},
 		getLocationFunc() {
 			const self = this;
@@ -99,6 +100,31 @@ export default {
 					}, 1000);
 				}
 			});
+		},
+		/**
+		 * 上传磅单
+		 */
+		submitImg (data) {
+			const self = this
+			uni.chooseImage({
+			    count: 1, //默认9
+			    sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+			    sourceType: ['album'], //从相册选择
+			    success: function (res) {
+					const tempFilePaths = res.tempFilePaths;
+					uni.uploadFile({
+					    url: 'https://gswl.sx56yun.com/lps/webApp/uploadBillboard', //仅为示例，非真实的接口地址
+					    filePath: tempFilePaths[0],
+					    name: 'file',
+					    formData: {
+					        'orderNumber': self.form.orderNumber
+					    },
+					    success: (uploadFileRes) => {
+					        self.imgSrc = tempFilePaths[0]
+					    }
+					});
+			    }
+			})
 		},
 		submit() {
 			const self = this;
@@ -148,5 +174,22 @@ export default {
 .start {
 	width: 450rpx;
 	margin: 50rpx auto;
+}
+.image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 120rpx;
+	height: 120rpx;
+	background: #eee;
+	.icon {
+		width: 50rpx;
+		height: 50rpx;
+	}
+	.img {
+		width: 90%;
+		height: 90%;
+		object-fit: cover;
+	}
 }
 </style>
