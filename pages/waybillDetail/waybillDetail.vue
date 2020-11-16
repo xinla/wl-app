@@ -26,7 +26,6 @@
 			</u-form>
 			<u-button type="primary" @click="submit">结束</u-button>
 		</view>
-		<!-- <u-modal v-model="isMask" content="请先停止未完成的订单再开始" confirm-text="我知道了"></u-modal> -->
 	</view>
 </template>
 
@@ -34,6 +33,13 @@
 export default {
 	data() {
 		return {
+			/**
+			 * 未完成的订单弹窗提示
+			 */
+			// isMask: false,
+			type: '',
+			weight: '',
+			imgSrc: '',
 			form: {
 				sourceNum: '',
 				ownerCustomer: '',
@@ -41,14 +47,7 @@ export default {
 				goodsName: '',
 				originatingPlace: '',
 				destination: ''
-			},
-			/**
-			 * 未完成的订单弹窗提示
-			 */
-			// isMask: false,
-			type: '',
-			weight: '',
-			imgSrc: ''
+			}
 		};
 	},
 	onLoad(option) {

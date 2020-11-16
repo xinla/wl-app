@@ -24,8 +24,7 @@
 		}, {
 			"path": "pages/waybillDetail/waybillDetail",
 			"style": {
-				"navigationBarTitleText": "运单信息",
-				"enablePullDownRefresh": true
+				"navigationBarTitleText": "运单信息"
 			}
 		}, {
 			"path": "pages/user/user",
@@ -91,7 +90,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "xx物流",
+		"navigationBarTitleText": "物流",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
